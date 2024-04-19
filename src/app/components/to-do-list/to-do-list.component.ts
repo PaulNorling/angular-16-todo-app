@@ -13,7 +13,7 @@ export class ToDoListComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.http.get('https://api.revel-health.com/channel-service/voice/callflow/dfad1f5a-4c32-4dd8-af6f-613ec78e3e13').subscribe(data => {
+    this.http.get('http://localhost:3000/tasks').subscribe(data => {
       console.log(data); // Process the received data
     });
   }
