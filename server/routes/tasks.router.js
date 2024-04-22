@@ -21,7 +21,7 @@ router.post('/', (req, res) => {
         })
         .catch((error) => {
             console.log('Error POSTing query:', queryText, 'error:', error);
-            res.sendStatus(500);
+            res.status(500);
         });
 });
 
@@ -35,7 +35,7 @@ router.get('/', (req,res) => {
         })
         .catch((error) => {
             console.log(`Query error: ${queryText}, error: ${error}`);
-            res.sendStatus(500);
+            res.status(500);
         });
 });
 
@@ -45,28 +45,28 @@ router.delete('/:id', (req, res) => {
     console.log('delete router id:', id);
     const queryText = `DELETE FROM "list" WHERE "id" = $1;`;
     pool.query(queryText, [id])
-        .then((result) => {
+        .then(() => {
             console.log('Task delete success!')
-            res.status(200).json(result);
+            res.status(200).json({});
         })
         .catch((error) => {
             console.log(`Error in delete query: ${queryText}, error ${error}`);
-            res.sendStatus(500);
+            res.status(500);
         })
 });
 
 //update status
 router.put('/:id', (req, res) => {
-    console.log('in put router', req);
     const taskId = req.params.id;
-    const queryText = `UPDATE "list" SET "complete" = NOT complete WHERE ID=$1`
+    const queryText = `UPDATE "list" SET "complete" = NOT complete WHERE ID=$1`;
     pool.query(queryText, [taskId])
         .then(() => {
-            console.log('It worked!');
-            res.sendStatus(200);
-        }).catch((error) => {
+            console.log('Task update success!');
+            res.status(200).json({ message: 'Task updated successfully' });
+        })
+        .catch((error) => {
             console.log('Error in put router', queryText, error);
-            res.sendStatus(500);
+            res.status(500).json({ error: 'Internal Server Error' });
         });
 });
 
