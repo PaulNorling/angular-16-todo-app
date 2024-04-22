@@ -9,12 +9,28 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./to-do-list.component.css']
 })
 export class ToDoListComponent implements OnInit {
+  task?: Task[];
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private taskService: TaskService) { }
 
+  // ngOnInit(): void {
+  //   this.http.get('http://localhost:3000/tasks').subscribe(data => {
+  //     console.log("to-do-list-component", data); // Process the received data
+  //   });
+  // }
   ngOnInit(): void {
-    this.http.get('http://localhost:3000/tasks').subscribe(data => {
-      console.log(data); // Process the received data
+    this.retrieveTasks();
+  }
+
+  retrieveTasks(): void {
+    this.taskService.getAll().subscribe({
+      next: (data) => {
+        this.task = data;
+        console.log("to-do-list-component", data);
+      },
+      error: (e) => console.error(e)
     });
   }
 }
