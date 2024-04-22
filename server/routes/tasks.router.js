@@ -45,9 +45,9 @@ router.delete('/:id', (req, res) => {
     console.log('delete router id:', id);
     const queryText = `DELETE FROM "list" WHERE "id" = $1;`;
     pool.query(queryText, [id])
-        .then(() => {
+        .then((result) => {
             console.log('Task delete success!')
-            res.sendStatus(200);
+            res.status(200).json(result);
         })
         .catch((error) => {
             console.log(`Error in delete query: ${queryText}, error ${error}`);

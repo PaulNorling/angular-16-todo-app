@@ -19,4 +19,8 @@ export class TaskService {
   create(data: any): Observable<any> {
     return this.http.post(baseUrl, data, { headers: { 'Content-Type': 'application/json' } });
   }
+
+  delete(id: any): Observable<any> {
+    return this.http.delete(`${baseUrl}/${id}`);
+  }
 }
