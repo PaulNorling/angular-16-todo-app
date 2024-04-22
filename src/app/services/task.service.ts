@@ -15,4 +15,8 @@ export class TaskService {
   getAll(): Observable<Task[]> {
     return this.http.get<Task[]>(baseUrl);
   }
+
+  create(data: any): Observable<any> {
+    return this.http.post(baseUrl, data, { headers: { 'Content-Type': 'application/json' } });
+  }
 }
