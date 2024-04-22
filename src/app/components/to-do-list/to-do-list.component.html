@@ -1,4 +1,6 @@
-<p>to-do-list works!</p>
+<p>Angular Full Stack TODO List!</p>
+<input [(ngModel)]="newTask" placeholder="Enter task"/>
+<button (click)="addTask()">Add Task</button>
 <ul>
     <li *ngFor="let x of task">{{ x.task }}</li>
 </ul>
