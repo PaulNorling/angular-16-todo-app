@@ -16,7 +16,8 @@ router.post('/', (req, res) => {
     pool.query(queryText, [newTask.task, newTask.complete])
         .then((result) => {
             console.log('POST result from db:', result);
-            res.sendStatus(201);
+            // Send back the created task data in JSON format
+            res.status(201).json(result);
         })
         .catch((error) => {
             console.log('Error POSTing query:', queryText, 'error:', error);
