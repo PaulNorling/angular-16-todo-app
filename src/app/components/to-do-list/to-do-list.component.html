@@ -2,5 +2,8 @@
 <input [(ngModel)]="newTask" placeholder="Enter task"/>
 <button (click)="addTask()">Add Task</button>
 <ul>
-    <li *ngFor="let x of task">{{ x.task }}</li>
+  <li *ngFor="let task of tasks">
+    {{ task.task }}
+    <button (click)="deleteTask(task)">Delete</button>
+  </li>
 </ul>
