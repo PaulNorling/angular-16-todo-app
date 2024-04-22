@@ -56,4 +56,14 @@ export class ToDoListComponent implements OnInit {
       error: (e) => console.error(e)
     });
   }
+
+  updateTask(task: Task): void {
+    console.log("updateTask", task);
+    this.taskService.update(task.id, task).subscribe({
+      next: () => {
+        this.retrieveTasks();
+      },
+      error: (e) => console.error(e)
+    });
+  }
 }
